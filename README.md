@@ -1,14 +1,14 @@
-* Utility functions for creating comints
+# Utility functions for creating comints
 
 A tiny library to expose some of the awesome subprocess/terminal creating functionality
 from emacs comint.el in a slightly easier to use fashion. 
 
-* Sample usage:
+# Sample usage:
 ```elisp
   ;;In elisp code
   (defproc "noir-server" "lein" '("run")
   "Run a noir server")
-  ```
+```
   
 While editing:
   M-x run-proc    ;;Brings up a comint running bash
