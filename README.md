@@ -11,7 +11,7 @@ from emacs comint.el in a slightly easier to use fashion.
 ```
   
 While editing:
-  M-x run-proc    ;;Brings up a comint running bash
+  M-x run-proc    Brings up a comint running bash
   
   
 I kind of doubt anyone will actually use this beyond me, but if you do and you have something you want changed, make a pull request!
