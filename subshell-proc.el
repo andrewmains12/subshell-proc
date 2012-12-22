@@ -1,7 +1,7 @@
 ;;; subshell-proc.el --- Functions for working with comints
 ;; Author: Andrew Mains
 ;; URL: https://github.com/andrewmains12/subshell-proc
-;; Version: 1.0.0
+;; Version: 0.1
 ;;
 ;; Sample usage:
 ;;
@@ -17,7 +17,6 @@
 ;;
 
 (require 'cl)
-(provide 'subshell-proc)
 
 
 (defmacro defproc (fn-name command command-args &optional docstring)
@@ -52,7 +51,7 @@
   (let ((command-list (split-string command)))
     (funcall (make-proc-run-fn (car command-list) (cdr command-list) buffer-name))))
 
-
+(provide 'subshell-proc)
 
 
 ;;; subshell-proc.el ends here
