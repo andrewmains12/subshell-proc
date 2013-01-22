@@ -1,12 +1,12 @@
 ;;; subshell-proc.el --- Functions for working with comints
 ;; Author: Andrew Mains
 ;; URL: https://github.com/andrewmains12/subshell-proc
-;; Version: 0.1
+;; Version: 0.2
 ;;
 ;; Sample usage:
 ;;
 ;; ;;In elisp code
-;; (defproc "noir-server" "lein" '("run")
+;; (defproc noir-server "lein" '("run")
 ;; "Run a noir server")  
 ;;
 ;; While editing:
@@ -21,14 +21,13 @@
 
 (defmacro defproc (fn-name command command-args &optional docstring)
   "Defines an interactive function which creates a comint subprocess using command"
-  (let* ((fn-sym (intern fn-name)))
-
-    `(defun ,fn-sym (&rest extra-args)       
+    `(defun ,fn-name (&rest extra-args)       
        ,docstring
        (interactive)
        (funcall 
-        (make-proc-run-fn ,command ,command-args ,(format "*%s*" fn-name)))
-     )))
+        (make-proc-run-fn ,command ,command-args 
+                          ,(format "*%s*" (symbol-name fn-name))))
+     ))
 
 
 (defun make-proc-run-fn (command command-args &optional buffer-name)
