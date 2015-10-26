@@ -8,6 +8,8 @@ from emacs comint.el in a slightly easier to use fashion.
   ;;In elisp code
   (defproc "noir-server" "lein" '("run")
   "Run a noir server")
+  (defproc echo-test "echo" `(,buffer-file-name)
+  "Print `buffer-file-name'")
 ```
   
 While editing:
