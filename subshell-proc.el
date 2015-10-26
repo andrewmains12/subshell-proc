@@ -18,20 +18,21 @@
 ;;
 ;;
 
-(defmacro defproc (fn-name command &optional command-args docstring)
+(defmacro defproc (fn-name command &optional command-args docstring display-fn)
   "Defines an interactive function which creates a comint subprocess using command"
     `(defun ,fn-name (&rest extra-args)
        ,docstring
        (interactive)
        (funcall
         (make-proc-run-fn ,command ,command-args
-                          ,(format "*%s*" (symbol-name fn-name))))))
+                          ,(format "*%s*" (symbol-name fn-name))
+                          ,display-fn))))
 
-(defun make-proc-run-fn (command &optional command-args buffer-name)
+(defun make-proc-run-fn (command &optional command-args buffer-name display-fn)
   (lambda (&rest extra-args)
     (let* ((buffer-name (or buffer-name (format "*%s*" command)))
            (buffer (get-buffer-create buffer-name)))
-      (pop-to-buffer buffer)
+      (funcall (or display-fn 'pop-to-buffer) buffer)
       (apply 'make-comint-in-buffer
              (append (list buffer-name buffer command nil) command-args)))))
 
