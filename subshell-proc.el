@@ -19,6 +19,7 @@
 (require 'cl)
 
 
+;;;###autoload
 (defmacro defproc (fn-name command command-args &optional docstring)
   "Defines an interactive function which creates a comint subprocess using command"
     `(defun ,fn-name (&rest extra-args)       
@@ -45,6 +46,7 @@
                   )))))
 
 
+;;;###autoload
 (defun run-proc (command &optional buffer-name)
   (interactive "MCommand to run: ")
   (let ((command-list (split-string command)))
