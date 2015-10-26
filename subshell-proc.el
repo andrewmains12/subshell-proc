@@ -1,4 +1,4 @@
-;;; subshell-proc.el --- Functions for working with comints
+;;; subshell-proc.el --- Functions for working with comints -*- lexical-binding: -*-
 ;; Author: Andrew Mains
 ;; URL: https://github.com/andrewmains12/subshell-proc
 ;; Version: 0.2
@@ -18,9 +18,6 @@
 ;;
 ;;
 
-(require 'cl)
-
-
 (defmacro defproc (fn-name command command-args &optional docstring)
   "Defines an interactive function which creates a comint subprocess using command"
     `(defun ,fn-name (&rest extra-args)
@@ -31,16 +28,12 @@
                           ,(format "*%s*" (symbol-name fn-name))))))
 
 (defun make-proc-run-fn (command command-args &optional buffer-name)
-  (lexical-let ((buffer-name buffer-name)
-                (command command)
-                (command-args command-args))
-    (function (lambda (&rest extra-args)
-                (let* ((buffer-name (or buffer-name (format "*%s*" command)))
-                       (buffer (get-buffer-create buffer-name))
-                       )
-                  (pop-to-buffer buffer)
-                  (apply 'make-comint-in-buffer
-                         (append (list buffer-name buffer command nil) command-args)))))))
+  (lambda (&rest extra-args)
+    (let* ((buffer-name (or buffer-name (format "*%s*" command)))
+           (buffer (get-buffer-create buffer-name)))
+      (pop-to-buffer buffer)
+      (apply 'make-comint-in-buffer
+             (append (list buffer-name buffer command nil) command-args)))))
 
 (defun run-proc (command &optional buffer-name)
   (interactive "MCommand to run: ")
