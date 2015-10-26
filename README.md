@@ -10,6 +10,12 @@ from emacs comint.el in a slightly easier to use fashion.
   "Run a noir server")
   (defproc echo-test "echo" `(,buffer-file-name)
   "Print `buffer-file-name'")
+  (defproc echo-test2 "echo" `(,buffer-file-name)
+  "Print `buffer-file-name' without selecting *echo* buffer."
+  'display-buffer)
+  (defproc xeyes "xeyes" nil
+  "Run xeyes without popping up *xeyes* buffer"
+  'ignore)
 ```
   
 While editing:
