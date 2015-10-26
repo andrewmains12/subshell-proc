@@ -18,7 +18,7 @@
 ;;
 ;;
 
-(defmacro defproc (fn-name command command-args &optional docstring)
+(defmacro defproc (fn-name command &optional command-args docstring)
   "Defines an interactive function which creates a comint subprocess using command"
     `(defun ,fn-name (&rest extra-args)
        ,docstring
@@ -27,7 +27,7 @@
         (make-proc-run-fn ,command ,command-args
                           ,(format "*%s*" (symbol-name fn-name))))))
 
-(defun make-proc-run-fn (command command-args &optional buffer-name)
+(defun make-proc-run-fn (command &optional command-args buffer-name)
   (lambda (&rest extra-args)
     (let* ((buffer-name (or buffer-name (format "*%s*" command)))
            (buffer (get-buffer-create buffer-name)))
