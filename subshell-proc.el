@@ -37,8 +37,9 @@
 
 (defun run-proc (command &optional buffer-name)
   (interactive "MCommand to run: ")
-  (let ((command-list (split-string command)))
-    (funcall (make-proc-run-fn (car command-list) (cdr command-list) buffer-name))))
+  (funcall (make-proc-run-fn shell-file-name
+                             (list shell-command-switch command)
+                             buffer-name)))
 
 (provide 'subshell-proc)
 
