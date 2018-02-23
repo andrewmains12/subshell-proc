@@ -1,7 +1,7 @@
 ;;; subshell-proc.el --- Functions for working with comints
 ;; Author: Andrew Mains
 ;; URL: https://github.com/andrewmains12/subshell-proc
-;; Version: 0.2
+;; Version: 0.3
 ;;
 ;; License: GPL-3+
 ;;
